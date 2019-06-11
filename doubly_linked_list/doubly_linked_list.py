@@ -114,14 +114,66 @@ class DoublyLinkedList:
         elif self.head is self.tail:
             return None
         else:
+            # set the previous objects `next` to this objects `next`
+            # set the next objects `previous` to this objects `previous`
             node.delete()
+            self.length -= 1
+
+            # add node to front
             self.add_to_head(node.value)
 
     def move_to_end(self, node):
-        pass
+        if not self.head and not self.tail:
+            return None
+        elif self.head is self.tail:
+            return None
+        else:
+            # set nodes previous obj's next to node `next`
+            # set nodes next obj's prev to nodes `prev'
+            node.delete()
+            self.length -= 1
+
+            # add node to back
+            self.add_to_tail(node.value)
+
+            # handle if node we are moving was the head
+            if self.head == node:
+                self.head = self.head.next
 
     def delete(self, node):
-        pass
+        cur_prev = node.prev
+        cur_next = node.next
+        node.prev = None
+        node.next = None
+        if cur_prev:
+            cur_prev.next = cur_next
+        if cur_next:
+            cur_next.prev = cur_prev
+        if node == self.head:
+            self.head = cur_next
+        if node == self.tail:
+            self.tail = cur_prev
+        self.length -= 1
 
     def get_max(self):
-        pass
+        if self.head == None and self.tail == None:
+            return None
+        max_value = 0
+        # start at head, increment until hits None
+        current = self.head
+        while current:
+            if current and current.value > max_value:
+                max_value = current.value
+                current = current.next
+        return max_value
+
+
+# dll = DoublyLinkedList()
+# dll.add_to_head(2)
+# print(dll.length)
+# dll.add_to_head(5)
+# print(dll.tail.value)
+# dll.add_to_tail(12)
+# print(dll.tail.value)
+# dll.move_to_end(dll.head)
+# print(dll.tail.prev.value)
