@@ -158,13 +158,16 @@ class DoublyLinkedList:
     def get_max(self):
         if self.head == None and self.tail == None:
             return None
+
+        if self.head == self.tail:
+            return self.head.value
         max_value = 0
         # start at head, increment until hits None
         current = self.head
         while current:
             if current and current.value > max_value:
                 max_value = current.value
-                current = current.next
+            current = current.next
         return max_value
 
 
