@@ -46,19 +46,24 @@ class BinarySearchTree:
             return self.right.get_max()
 
     def for_each(self, cb):
-        pass
+        cb(self.value)
+
+        if self.right:
+            self.right.for_each(cb)
+        if self.left:
+            self.left.for_each(cb)
 
 
-test = BinarySearchTree(5)
-print(test.value)  # 5
-print(test.left)  # None
-print(test.right)  # None
-test.insert(3)
-test.insert(10)
-print(test.left.value)  # 3
-print(test.right.value)  # 10
-# print(test.contains(3))
-# print(test.contains(10))
-print(test.contains(5))
-print(test.contains(3294))
-print(test.get_max())
+# `test = BinarySearchTree(5)
+# print(test.value)  # 5
+# print(test.left)  # None
+# print(test.right)  # None
+# test.insert(3)
+# test.insert(10)
+# print(test.left.value)  # 3
+# print(test.right.value)  # 10
+# # print(test.contains(3))
+# # print(test.contains(10))
+# print(test.contains(5))
+# print(test.contains(3294))
+# print(test.get_max())`
